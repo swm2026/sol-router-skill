@@ -1,0 +1,7 @@
+interface:
+  display_name: "Sol Router"
+  short_description: "Sol plans; Terra or Luna executes"
+  default_prompt: "Use $sol-router for this task and minimize token use."
+
+policy:
+  allow_implicit_invocation: false
