@@ -9,7 +9,7 @@
 ## 安装
 
 ```powershell
-npx skills add https://github.com/swm2026/astra-router-skill --skill astra-router -g
+npx skills add https://github.com/swm2026/sol-router-skill --skill astra-router -g
 ```
 
 将 `<OWNER>` 替换为此 GitHub 仓库的拥有者。
