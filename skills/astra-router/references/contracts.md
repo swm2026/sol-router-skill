@@ -1,41 +1,23 @@
-# Compact handoff contracts
+# Handoff contracts
 
-Use only applicable fields. Preserve critical details even when they exceed a soft length target.
+Omit unused fields. Pass facts once and subsequent changes as deltas.
 
-## Task packet
+Task: GOAL, WORKSPACE, REQUEST_MODE, AUTHORIZED_SCOPE, PROJECT_CONSTRAINTS, ACCEPTANCE, FACTS_WITH_SOURCES, UNKNOWNS. State a DECISION_QUESTION only if a brain is needed.
 
-GOAL; WORKSPACE; REQUEST_MODE=ADVICE|INVESTIGATE|IMPLEMENT;
-AUTHORIZED_SCOPE; PROJECT_CONSTRAINTS; ACCEPTANCE;
-KNOWN_FACTS_WITH_SOURCES; UNKNOWNS; DECISION_QUESTION.
+Evidence: observations with paths/lines or command/results and relevant snapshot; separate inference and unresolved assumptions. Send excerpts, not raw logs or repository dumps. Refresh affected evidence after changes.
 
-## Executor investigation
+Brain: STATUS=PROCEED|REVISE|NEEDS_EVIDENCE|NEEDS_INPUT|BLOCKED; EXECUTOR=TERRA|LUNA|NONE; DECISION, RATIONALE, bounded BRIEF, ACCEPTANCE_GATES.
+Sol escalates only with a concrete strategic question. R4 Sol challenge supplies up to three options, counterevidence, material risks and the unresolved disagreement. Astra receives original constraints and cited evidence, not just Sol's recommendation.
 
-FACTS: source paths/lines or command and result; identify snapshot/revision where relevant.
-UNVERIFIED_ASSUMPTIONS; MATERIAL_UNKNOWNS; OPTIONS_IF_KNOWN;
-DECISION_NEEDED; RECOMMENDED_NEXT_CHECK.
+Executor: complete the assigned investigation or authorized implementation and validation. Do not spawn agents; preserve others' edits. Return STATUS, ARTIFACTS, checks and outcomes, remaining issues. Ordinary implementation choices do not need brain approval.
 
-Separate observations from inference. Inspect applicable project instructions before project work. Evidence may become stale after edits or runtime changes; refresh only the affected evidence.
+Delta follow-up: previous decision identifier or short summary, changed fact/source, invalidated assumption, precise question. Preserve constraints without reposting unchanged transcripts.
 
-## Brain decision
-
-STATUS=PROCEED|REVISE|NEEDS_EVIDENCE|NEEDS_INPUT|BLOCKED
-EXECUTOR=TERRA|LUNA|NONE
-RATIONALE; DECISION_OR_ANSWER; EXECUTION_BRIEF; ACCEPTANCE_GATES.
-
-For NEEDS_EVIDENCE: include a precise evidence request and why it changes the decision.
-For R4 challenge review: provide up to three options, material risks, counterevidence, key disagreement, and a recommendation. Astra receives original constraints and source-backed evidence as well as this analysis.
-
-## Executor instructions and result
-
-Complete the assigned investigation or authorized implementation and proportionate validation. Do not spawn agents. You are not alone in the workspace; preserve others' edits. Do not expand scope or silently alter key decisions. Correct routine implementation problems yourself; surface disproven assumptions with evidence.
-
-Return STATUS; CHANGED_FILES_OR_ARTIFACTS; VALIDATION_RESULTS (commands/checks, outcomes, and relevant failures); KNOWN_ISSUES; DECISION_NEEDED if any. For advice or investigation, return findings and source evidence rather than fabricated changed files.
-
-## Routing examples
-
-- Exact typo replacement with known acceptance: R0, Luna.
-- Change a test assertion to bypass an unexplained failure: investigate with Terra; R2, not automatic R0.
-- Compare architectures with missing repository facts: Terra investigation, Astra decision, no edits unless authorized.
-- Ambiguous runtime bug: R2; Terra can return evidence and resume after a revised plan.
-- High-impact migration with disputed rollback assumptions: R4; brain judgment does not authorize deployment.
-- Supplied evidence sufficient for a strategic opinion: R3, Astra, EXECUTOR=NONE.
+Examples:
+- Exact typo: R0; direct parent work can avoid a disproportionate handoff.
+- Known failing test needing diagnosis: R1 Terra, not automatic Astra.
+- User-supplied ordered implementation plan: R1 Terra; do not re-plan.
+- Multi-stage dependencies with a clear goal but an unresolved sequencing decision: R2 Sol.
+- Missing repository facts for competing architectures: Terra evidence, then R3 Astra.
+- Migration with disputed rollback assumptions and material consequences: R4; no permission expansion.
+- Strategic opinion with sufficient supplied evidence: R3, no executor.

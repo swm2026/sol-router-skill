@@ -1,57 +1,48 @@
 ---
 name: astra-router
-description: Explicit-only, token-conscious task orchestration. Use when the user invokes $astra-router; bypass Astra for mechanical or routine work and use Astra only for engineering or strategic judgment.
+description: Explicit-only economical routing with Sol for necessary planning, Astra for consequential decisions, and direct Terra/Luna execution for ordinary work.
 ---
 
 # Astra Router
 
-Activate only when the user invokes `$astra-router`. Preserve the user's goal, workspace, authorization, project rules, scope, and acceptance criteria.
+Use only for an explicitly requested routed task. Discussing or editing this skill does not itself require its agent workflow. The public name stays astra-router; Sol and Astra are distinct internal models.
 
-## Responsibilities
+## Choose the minimum sufficient route
 
-- Parent classifies the task, relays compact evidence, manages agents, reviews results, and communicates. It does not duplicate delegated work.
-- Astra is the only planning and decision brain when planning is needed. It chooses what should be done, whether it should be done, and which executor is suitable.
-- Terra/Luna gather evidence, implement authorized changes, and validate results.
-- Astra must not inspect repositories, run commands, edit files, test, or generate assets. Astra's judgment never expands user authorization or overrides project constraints.
-- Executors must not spawn agents. Run at most one executor at a time and tell it that other work may exist and must not be reverted.
-
-## Routing
-
-Classify by uncertainty, behavioral impact, reversibility, and consequence—not file count alone.
-
-| Level | Conditions | Route |
+| Level | Trigger | Default path |
 | --- | --- | --- |
-| R0 | Method and acceptance are explicit; work is mechanical, low impact, and recoverable | Luna directly |
-| R1 | Goal, method, and acceptance are clear; execution is routine and low risk | Luna directly (no Astra) |
-| R2 | Debugging, behavior, implementation, or integration needs engineering judgment | Astra → Terra |
-| R3 | Direction or a material tradeoff must be decided | Astra → executor if needed |
-| R4 | Material consequences and disputed assumptions warrant an adversarial evidence review | Terra investigation → Astra → executor if needed |
+| R0 | Mechanical, narrow, low-impact work | Luna |
+| R1 | Clear goal and acceptance; ordinary coding, debugging, investigation or integration | Terra |
+| R2 | A known goal needs a separate decomposition or sequencing decision that the executor cannot reasonably settle | Sol → Terra/Luna |
+| R3 | Competing directions, architecture or material risk require a consequential decision | Astra → executor if needed |
+| R4 | High consequences AND a concrete dispute justify independent challenge before judgment | Sol challenge → Astra → Terra if needed |
 
-R0 and R1 are the token-saving path: do not call Astra. R2–R4 use Astra only when its judgment can change the implementation or risk outcome. R4 is exceptional. Astra must distinguish observation, inference, uncertainty, and decision. Missing facts call for bounded investigation, not automatic escalation. Advice-only work may return `EXECUTOR=NONE`; a decision does not authorize implementation.
+File count, code changes, or a failed test alone do not trigger a brain. Executors may plan their own work. Missing evidence triggers investigation, not a stronger model. R0/R1 have zero separate brain calls; R2/R3 normally one; R4 normally two. These are decision defaults, not measured token savings.
 
-## Evidence and execution loop
+Sol plans a known goal; Astra decides material tradeoffs. Neither brain scans repositories, runs project commands, edits, tests, or generates assets. For an already-supported advisory decision, allow EXECUTOR=NONE. Brain judgment never expands user authorization.
 
-1. Build a compact task packet containing goal, scope, constraints, acceptance, known facts with sources, and unknowns.
-2. If the task is R0/R1, route directly to Luna and do not create a planning-agent call. If material evidence is missing for R2–R4, use one executor for a bounded read-only investigation first. Use Terra for uncertain repository or runtime behavior.
-3. For R2–R4, give Astra only the task packet and evidence. If Astra needs more facts, request a targeted investigation from the same executor and resume Astra; never force a decision from an inadequate summary.
-4. After a supported decision and explicit implementation authorization, resume that executor with the decision, scope, evidence, and acceptance gates. Otherwise create the selected executor.
-5. Executors solve ordinary failures within scope. If a key assumption is disproven, return evidence and the smallest proposed adjustment. Resume Astra only for a material decision change, then resume the executor.
-6. Run proportionate validation and report evidence against the acceptance criteria.
+## Execute and recover
 
-If Luna reveals genuine engineering uncertainty, park it, transfer its evidence, and replace it with Terra transparently. Never silently substitute an unavailable model.
+1. Preserve the goal, exact workspace, applicable instructions, authorized scope and acceptance. Use existing valid evidence.
+2. For R0/R1, let the executor investigate, implement and validate end to end. For R2–R4, gather missing evidence with that same executor before asking a precise decision question. Read [contracts](references/contracts.md) only when constructing a handoff.
+3. Send the selected brain a compact evidence packet. Sol may return a concrete strategic question for Astra; do not automatically add Astra to approve Sol's plan.
+4. Resume the executor with the supported decision and existing authorization. Ordinary failures stay with the executor. Reopen a brain decision only when new evidence invalidates a material assumption; send the delta and reason, not the whole history.
+5. Verify proportionately. Do not repeat reads or tests unless changes, stale evidence, failure or contradictions justify it. Preserve other contributors' work. Executors do not spawn agents.
 
-## Stop conditions
+Run child stages sequentially; idle agents may remain available while another stage runs. Keep at most one executor active. Reuse the same executor through investigation and implementation. Replace Luna with Terra if new engineering uncertainty warrants it, transferring evidence and disclosing the replacement.
 
-Pause only for missing necessary authorization or user information, unavailable external prerequisites, or an unresolved blocker after focused recovery. Two attempts with the same condition require root-cause analysis or a changed approach. Stop cycling when progress requires user input or an external change. Report `BLOCKED`, `NEEDS_INPUT`, `PARTIAL`, or `COMPLETE` honestly.
+Two attempts with the same unresolved condition require root-cause analysis or a changed approach. Pause dependent work for missing necessary input/authority or external prerequisites; continue independent authorized work. Preserve project account, broker-write and runtime-guard restrictions. Never demand fresh authorization for work already authorized.
 
-Project rules govern sensitive actions, Git operations, and external writes. Astra approval is never user approval. Preserve investment-project restrictions such as `broker_orders_enabled=false` and `runtime_guard`.
+## Avoid orchestration overhead
 
-## Runtime and cost
+Before delegation, read [runtime](references/runtime.md). If the parent already runs the required model, use it in that role instead of spawning a duplicate. A parent acting as a brain retains the no-project-execution boundary, including project typo edits. A trivial non-project answer or formatting task on supplied text may be completed directly by the parent when a handoff would add more work; disclose direct execution. Project execution belongs to Terra/Luna.
 
-Before spawning, read [references/runtime.md](references/runtime.md) and verify the current tool schema and model availability. Use `fork_turns="none"`; run stages sequentially and reuse an idle executor when practical. Do not claim token savings without comparable observed usage.
+Use short, source-backed packets and delta-only follow-ups. Soft targets: brain input 800–1,200 tokens, Sol output 150–250, Astra output 200–350. Expand only for material evidence, constraints or acceptance. These targets do not cap internal reasoning or enforce billing limits. Do not reload unchanged skill references or narrate internal handoffs at length.
 
-Keep evidence compact without omitting sources, uncertainty, authorization, or acceptance gates. Do not send repository dumps. R0/R1 should normally use one executor call and zero Astra calls; R2/R3 one Astra call and one executor; R4 adds a justified investigation pass. These are routing targets, not guarantees. The skill does not switch the parent model.
+Do not call a second brain for routine approval or start a fresh agent for every stage. Reuse an existing valid decision until its assumptions change. For long unrelated work, prefer a fresh user-started task with a compact handoff; do not create tasks unasked. This skill cannot switch the parent model or make its context free.
 
-## Completion
+## Report and improve
 
-Report outcome, changed artifacts, validation evidence, limitations, route level, Astra usage, executor usage, and status. Disclose fallbacks or deviations. Never report work or checks that did not occur.
+Give outcome, validation and limitations, then one short trace: route, actual parent/model roles, brain calls, executor starts/resumes, and status. If actual model or usage information is unavailable, say unknown. Never claim a child was used when only the parent ran tools.
+
+Read [efficiency](references/efficiency.md) when the user requests a cost audit or observed overhead/recurring rework warrants analysis. Propose optimizations from evidence; do not silently rewrite this skill, launch benchmarks, or remove acceptance gates.
