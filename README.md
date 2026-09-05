@@ -1,16 +1,15 @@
 # Astra Router
 
-`astra-router` 是一个仅显式调用、证据优先的任务路由技能：Sol 负责常规规划，Astra 负责战略判断，Terra 或 Luna 负责取证、执行和验证。
+`astra-router` 是一个仅显式调用、证据优先的任务路由技能：Astra 负责规划和战略判断，Terra 或 Luna 负责取证、执行和验证。
 
-- Astra：处理架构、风险、重大权衡和争议证据。
-- Sol：处理常规规划和执行者选择。
+- Astra：处理常规规划、架构、风险、重大权衡和争议证据。
 - Terra：处理复杂项目执行，例如代码或场景改动、调试、跨文件集成、安全与高风险任务。
 - Luna：处理简单、范围明确且低风险的执行，例如文档、确定性验证、元数据或少量直接文件改动。
 
 ## 安装
 
 ```powershell
-npx skills add https://github.com/swm2026/sol-router-skill --skill astra-router -g
+npx skills add https://github.com/swm2026/astra-router-skill --skill astra-router -g
 ```
 
 将 `<OWNER>` 替换为此 GitHub 仓库的拥有者。
@@ -27,7 +26,7 @@ $astra-router 为这个 Godot 项目修复存档加载失败，并完成验证�
 
 ## 权限与局限
 
-- Astra 和 Sol 只负责判断与规划，不能编辑文件、运行命令、浏览、测试或生成资源。
+- Astra 只负责判断与规划，不能编辑文件、运行命令、浏览、测试或生成资源。
 - 每次最多运行一个执行者；缺少事实时可先由执行者只读调查，再恢复同一执行器。
 - 大脑判断不会扩大用户授权，也不能批准外部写入、部署或交易。
 - 执行者仍受当前工作区权限、项目指令、可用工具及模型可用性限制；无权限或缺少模型时，任务会报告阻塞而不是绕过限制。

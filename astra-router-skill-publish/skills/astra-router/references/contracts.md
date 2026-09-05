@@ -23,8 +23,7 @@ EXECUTOR=TERRA|LUNA|NONE
 RATIONALE; DECISION_OR_ANSWER; EXECUTION_BRIEF; ACCEPTANCE_GATES.
 
 For NEEDS_EVIDENCE: include a precise evidence request and why it changes the decision.
-For Sol escalation: include ESCALATE_TO_ASTRA=true and the unresolved decision question.
-For R4 Sol challenge: provide up to three options, material risks, counterevidence, key disagreement, and a recommendation. Astra receives original constraints and source-backed evidence as well as this analysis.
+For R4 challenge review: provide up to three options, material risks, counterevidence, key disagreement, and a recommendation. Astra receives original constraints and source-backed evidence as well as this analysis.
 
 ## Executor instructions and result
 
