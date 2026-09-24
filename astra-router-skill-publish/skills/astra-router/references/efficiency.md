@@ -10,8 +10,8 @@ Keep the default trace one line; do not add a verbose log or persistent file to 
 
 ## Find waste in this order
 
-1. Brain invoked despite a clear plan: try direct Terra/Luna.
-2. Astra doing parent orchestration on ordinary engineering: suggest a Terra parent on the next user-started task.
+1. Brain invoked despite a clear plan: try direct Sol/Luna.
+2. Astra doing parent orchestration on ordinary engineering: suggest a Sol parent on the next user-started task.
 3. Sol and Astra both approving routine work: keep only the role resolving a concrete uncertainty.
 4. Repeated raw evidence: one source-backed packet plus deltas.
 5. Recreated executor: resume the same one with existing evidence.

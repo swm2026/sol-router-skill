@@ -1,6 +1,6 @@
 interface:
   display_name: "Astra Router"
-  short_description: "Direct execution with on-demand Sol/Astra reasoning"
-  default_prompt: "Use $astra-router: execute ordinary work directly with Terra/Luna and involve Sol or Astra only for a concrete planning or decision need."
+  short_description: "GPT-6 Luna/Sol execution with on-demand Astra judgment"
+  default_prompt: "Use $astra-router: route mechanical work to Luna, demanding engineering to Sol, and involve Astra only for a concrete consequential decision."
 policy:
   allow_implicit_invocation: false
